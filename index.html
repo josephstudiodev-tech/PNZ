@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Net Zero | Clean Air for Everyone</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        friendly: ['Fredoka', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            900: '#14532d',
+                            dark: '#0a192f',
+                            card: '#112240',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass-card {
+            background: rgba(17, 34, 64, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(74, 222, 128, 0.2);
+        }
+        .glass-card:hover {
+            border-color: rgba(74, 222, 128, 0.4);
+        }
+        .tab-btn.active {
+            background-color: #22c55e;
+            color: #000;
+            font-weight: 700;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-brand-dark text-slate-100 font-sans min-h-screen flex flex-col relative selection:bg-brand-500 selection:text-black">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="sticky top-0 z-40 bg-brand-dark/95 border-b border-slate-800 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Logo & Title -->
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-2xl bg-gradient-to-tr from-brand-600 to-emerald-400 flex items-center justify-center text-black text-2xl shadow-lg shadow-brand-500/20">
+                    🌱
+                </div>
+                <div>
+                    <h1 class="font-friendly text-2xl font-bold tracking-wide text-white">Project Net Zero</h1>
+                    <p class="text-xs text-brand-400 font-medium">Clean Air & Smart Environmental Tracking</p>
+                </div>
+            </div>
+
+            <!-- Tab Navigation Links -->
+            <nav class="hidden md:flex items-center gap-2 bg-slate-900/90 p-1.5 rounded-full border border-slate-800 font-friendly">
+                <button class="tab-btn active px-5 py-2 rounded-full text-sm transition-all" data-tab="home-page" data-key="nav_home">
+                    🏠 Home
+                </button>
+                <button class="tab-btn px-5 py-2 rounded-full text-sm text-slate-300 hover:text-white transition-all" data-tab="about-page" data-key="nav_about">
+                    ℹ️ About Us
+                </button>
+                <button class="tab-btn px-5 py-2 rounded-full text-sm text-slate-300 hover:text-white transition-all" data-tab="future-page" data-key="nav_future">
+                    🚀 Our Future Plans
+                </button>
+            </nav>
+
+            <!-- Language Switcher -->
+            <div class="flex items-center gap-3">
+                <div class="relative inline-flex items-center gap-2 bg-slate-900 border border-slate-700 px-3 py-1.5 rounded-xl">
+                    <i class="fa-solid fa-globe text-brand-400 text-sm"></i>
+                    <select id="lang-select" class="bg-transparent text-xs font-semibold text-white outline-none cursor-pointer">
+                        <option value="en" class="bg-slate-900 text-white">English 🇬🇧</option>
+                        <option value="hi" class="bg-slate-900 text-white">हिन्दी 🇮🇳</option>
+                        <option value="te" class="bg-slate-900 text-white">తెలుగు 🇮🇳</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Tabs -->
+        <div class="flex md:hidden border-t border-slate-800 bg-slate-900/95 p-2 justify-around font-friendly text-xs">
+            <button class="tab-btn active px-3 py-1.5 rounded-lg" data-tab="home-page" data-key="nav_home">🏠 Home</button>
+            <button class="tab-btn px-3 py-1.5 rounded-lg text-slate-300" data-tab="about-page" data-key="nav_about">ℹ️ About Us</button>
+            <button class="tab-btn px-3 py-1.5 rounded-lg text-slate-300" data-tab="future-page" data-key="nav_future">🚀 Future</button>
+        </div>
+    </header>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+        <!-- ================= PAGE 1: HOME ================= -->
+        <section id="home-page" class="page-content space-y-8">
+            
+            <!-- Hero Banner -->
+            <div class="glass-card rounded-3xl p-6 sm:p-10 border border-brand-500/30 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 relative overflow-hidden">
+                <div class="space-y-3 max-w-2xl z-10">
+                    <span class="inline-block px-3 py-1 bg-brand-500/20 text-brand-400 rounded-full text-xs font-friendly font-bold tracking-wide uppercase border border-brand-500/30">
+                        ✨ Super Easy Air Monitor
+                    </span>
+                    <h2 class="text-3xl sm:text-5xl font-friendly font-bold text-white leading-tight" data-key="home_hero_title">
+                        Is the Air Safe & Fresh Today?
+                    </h2>
+                    <p class="text-slate-300 text-sm sm:text-base leading-relaxed" data-key="home_hero_desc">
+                        We use tiny magic smart sensors to check if the air has dirty smoke or bad gas. Pick your area below to see if it's safe to play outdoors!
+                    </p>
+                </div>
+                <div class="text-7xl sm:text-8xl animate-bounce">
+                    🌤️
+                </div>
+            </div>
+
+            <!-- AREA SELECTOR & LIVE CALCULATOR SECTION -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+                
+                <!-- Left: Interactive Controls & Area Selector -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="glass-card p-6 rounded-3xl space-y-6">
+                        <h3 class="font-friendly text-xl font-bold text-white flex items-center gap-2">
+                            📍 Pick Your Area
+                        </h3>
+                        
+                        <!-- Dropdown Select -->
+                        <div class="space-y-2">
+                            <label class="text-xs text-slate-400 font-medium" data-key="label_select_area">Select Location:</label>
+                            <select id="area-select" class="w-full bg-slate-900 border-2 border-brand-500/40 focus:border-brand-400 rounded-2xl p-3.5 text-white font-friendly text-base outline-none cursor-pointer">
+                                <option value="hitam">🏫 HITAM College Campus (Primary Zone)</option>
+                                <option value="jeedimetla">🏭 Jeedimetla Industrial Area</option>
+                                <option value="patancheru">🏗️ Patancheru Factory Belt</option>
+                                <option value="kukatpally">🚗 Kukatpally Traffic Hub</option>
+                            </select>
+                        </div>
+
+                        <hr class="border-slate-800">
+
+                        <!-- Simple Interactive Calculator / Simulators -->
+                        <div class="space-y-4">
+                            <h4 class="font-friendly text-base text-brand-400 font-bold" data-key="sim_title">
+                                🎛️ Change Things Up (Calculator Simulator)
+                            </h4>
+                            <p class="text-xs text-slate-400" data-key="sim_desc">
+                                Move the sliders to see how traffic and factories change the air pollution score at HITAM!
+                            </p>
+
+                            <!-- Slider 1: Traffic -->
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-friendly">
+                                    <span data-key="sim_traffic">🚗 Cars & Buses Traffic:</span>
+                                    <span id="traffic-val" class="font-bold text-brand-400">Medium</span>
+                                </div>
+                                <input type="range" id="slider-traffic" min="1" max="3" value="2" class="w-full accent-brand-500 cursor-pointer">
+                            </div>
+
+                            <!-- Slider 2: Factory Smoke -->
+                            <div class="space-y-1">
+                                <div class="flex justify-between text-xs font-friendly">
+                                    <span data-key="sim_factory">🏭 Nearby Factory Smoke:</span>
+                                    <span id="factory-val" class="font-bold text-brand-400">Low</span>
+                                </div>
+                                <input type="range" id="slider-factory" min="1" max="3" value="1" class="w-full accent-brand-500 cursor-pointer">
+                            </div>
+
+                            <button id="calc-btn" class="w-full py-3 bg-brand-500 hover:bg-brand-400 text-black font-friendly font-bold rounded-2xl shadow-lg shadow-brand-500/30 transition-all flex items-center justify-center gap-2">
+                                ⚡ Calculate Air Score
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Safe to Play Card & Simple Metrics -->
+                <div class="lg:col-span-7 space-y-6">
+                    
+                    <!-- Safe to Play Result Card -->
+                    <div id="status-card" class="glass-card p-6 sm:p-8 rounded-3xl border-2 border-emerald-500/50 flex flex-col sm:flex-row items-center justify-between gap-6 bg-gradient-to-br from-slate-900 to-emerald-950/40">
+                        <div class="text-center sm:text-left space-y-2">
+                            <span class="text-xs font-friendly font-bold text-emerald-400 uppercase tracking-widest" data-key="status_badge">
+                                CURRENT AIR HEALTH STATUS
+                            </span>
+                            <h3 id="status-title" class="font-friendly text-3xl font-bold text-white">
+                                Air is Clean & Safe! 🌟
+                            </h3>
+                            <p id="status-desc" class="text-slate-300 text-sm max-w-md">
+                                Yay! The air at HITAM has very little dirty smoke right now. It's super safe to run around and play soccer outside!
+                            </p>
+                        </div>
+                        <div id="status-emoji" class="text-7xl p-4 bg-slate-900/80 rounded-3xl border border-slate-700">
+                            ⚽
+                        </div>
+                    </div>
+
+                    <!-- 3 Simple Metric Bubbles -->
+                    <div class="grid grid-cols-3 gap-4 font-friendly">
+                        <div class="glass-card p-4 rounded-2xl text-center space-y-1">
+                            <span class="text-2xl">💨</span>
+                            <div class="text-xs text-slate-400">Smog Level</div>
+                            <div id="val-smog" class="text-xl font-bold text-brand-400">Low (Good)</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-2xl text-center space-y-1">
+                            <span class="text-2xl">🏭</span>
+                            <div class="text-xs text-slate-400">Factory Gas</div>
+                            <div id="val-gas" class="text-xl font-bold text-emerald-400">Safe</div>
+                        </div>
+                        <div class="glass-card p-4 rounded-2xl text-center space-y-1">
+                            <span class="text-2xl">🌡️</span>
+                            <div class="text-xs text-slate-400">Air Score</div>
+                            <div id="val-score" class="text-xl font-bold text-emerald-400">42 / 100</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- INTERACTIVE LIVE GRAPH SECTION -->
+            <div class="glass-card p-6 sm:p-8 rounded-3xl space-y-4">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div>
+                        <h3 class="font-friendly text-xl font-bold text-white flex items-center gap-2">
+                            📈 Easy Pollution Graph
+                        </h3>
+                        <p class="text-xs text-slate-400" data-key="graph_sub">
+                            Shows how clean or dirty the air was throughout the day. Lower numbers are better!
+                        </p>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs font-friendly">
+                        <span class="w-3 h-3 rounded-full bg-emerald-400"></span> Clean Air
+                        <span class="w-3 h-3 rounded-full bg-amber-400"></span> Okay Air
+                        <span class="w-3 h-3 rounded-full bg-rose-500"></span> Dirty Air
+                    </div>
+                </div>
+                <!-- Chart Canvas -->
+                <div class="w-full h-64 sm:h-80">
+                    <canvas id="pollutionChart"></canvas>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 2: ABOUT US ================= -->
+        <section id="about-page" class="page-content hidden space-y-10">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="px-3 py-1 bg-brand-500/20 text-brand-400 rounded-full text-xs font-friendly font-bold uppercase tracking-wide">
+                    EVERYTHING EXPLAINED SIMPLY
+                </span>
+                <h2 class="font-friendly text-3xl sm:text-4xl font-bold text-white" data-key="about_title">
+                    What is Project Net Zero?
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base" data-key="about_desc">
+                    Project Net Zero is a smart system created by engineering students at HITAM. It watches over our city to make sure factory chimneys and road vehicles don't release bad poison gases into the air we breathe!
+                </p>
+            </div>
+
+            <!-- Simple Breakdown Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 font-friendly">
+                <div class="glass-card p-6 rounded-3xl space-y-3">
+                    <div class="text-4xl">🤖</div>
+                    <h3 class="text-lg font-bold text-white">Smart Sensors</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        Small gadgets placed on buildings that act like electronic noses. They sniff the air every 10 seconds to check for toxic gases.
+                    </p>
+                </div>
+                <div class="glass-card p-6 rounded-3xl space-y-3">
+                    <div class="text-4xl">📷</div>
+                    <h3 class="text-lg font-bold text-white">AI Camera Eyes</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        Special cameras powered by AI look at factory chimneys to catch dark illegal smoke plumes even during the middle of the night.
+                    </p>
+                </div>
+                <div class="glass-card p-6 rounded-3xl space-y-3">
+                    <div class="text-4xl">🚨</div>
+                    <h3 class="text-lg font-bold text-white">Instant Alerts</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        If the air gets dangerous, the system automatically sends an emergency email and message to government pollution officers!
+                    </p>
+                </div>
+            </div>
+
+            <!-- TEAM MEMBERS SECTION -->
+            <div class="space-y-6">
+                <div class="text-center space-y-1">
+                    <h3 class="font-friendly text-2xl font-bold text-white" data-key="team_heading">
+                        👥 Meet Our HITAM Student Team
+                    </h3>
+                    <p class="text-xs text-slate-400">The 6 young innovators behind Project Net Zero</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Member 1 -->
+                    <div class="glass-panel glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-emerald-500/20 text-emerald-400 font-friendly font-bold text-xl flex items-center justify-center border border-emerald-500/40">
+                            JC
+                        </div>
+                        <div>
+                            <h4 class="font-friendly font-bold text-white text-base">Ch. Joseph Chandra</h4>
+                            <p class="text-xs text-brand-400 font-mono">Lead Team Member</p>
+                        </div>
+                    </div>
+                    <!-- Member 2 -->
+                    <div class="glass-panel glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-cyan-500/20 text-cyan-400 font-friendly font-bold text-xl flex items-center justify-center border border-cyan-500/40">
+                            LV
+                        </div>
+                        <div>
+                            <h4 class="font-friendly font-bold text-white text-base">K. Lakshmi Vaagdevi</h4>
+                            <p class="text-xs text-brand-400 font-mono">Project Innovator</p>
+                        </div>
+                    </div>
+                    <!-- Member 3 -->
+                    <div class="glass-panel glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-amber-500/20 text-amber-400 font-friendly font-bold text-xl flex items-center justify-center border border-amber-500/40">
+                            KM
+                        </div>
+                        <div>
+                            <h4 class="font-friendly font-bold text-white text-base">K. Mrudhula</h4>
+                            <p class="text-xs text-brand-400 font-mono">Project Researcher</p>
+                        </div>
+                    </div>
+                    <!-- Member 4 -->
+                    <div class="glass-panel glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-purple-500/20 text-purple-400 font-friendly font-bold text-xl flex items-center justify-center border border-purple-500/40">
+                            KC
+                        </div>
+                        <div>
+                            <h4 class="font-friendly font-bold text-white text-base">K. Chaitanya</h4>
+                            <p class="text-xs text-brand-400 font-mono">Hardware Lead</p>
+                        </div>
+                    </div>
+                    <!-- Member 5 -->
+                    <div class="glass-panel glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-rose-500/20 text-rose-400 font-friendly font-bold text-xl flex items-center justify-center border border-rose-500/40">
+                            KA
+                        </div>
+                        <div>
+                            <h4 class="font-friendly font-bold text-white text-base">K. Arya</h4>
+                            <p class="text-xs text-brand-400 font-mono">Software Specialist</p>
+                        </div>
+                    </div>
+                    <!-- Member 6 -->
+                    <div class="glass-panel glass-card p-5 rounded-2xl flex items-center gap-4">
+                        <div class="w-14 h-14 rounded-2xl bg-indigo-500/20 text-indigo-400 font-friendly font-bold text-xl flex items-center justify-center border border-indigo-500/40">
+                            DD
+                        </div>
+                        <div>
+                            <h4 class="font-friendly font-bold text-white text-base">D. Deshik</h4>
+                            <p class="text-xs text-brand-400 font-mono">Data Analyst</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- ================= PAGE 3: OUR FUTURE PLANS ================= -->
+        <section id="future-page" class="page-content hidden space-y-10">
+            
+            <div class="text-center max-w-3xl mx-auto space-y-3">
+                <span class="px-3 py-1 bg-brand-500/20 text-brand-400 rounded-full text-xs font-friendly font-bold uppercase tracking-wide">
+                    OUR ROADMAP
+                </span>
+                <h2 class="font-friendly text-3xl sm:text-4xl font-bold text-white" data-key="future_title">
+                    Our 4-Year Plan for Clean Air
+                </h2>
+                <p class="text-slate-300 text-sm sm:text-base">
+                    Here is how we plan to grow Project Net Zero over 4 years to make the whole city of Hyderabad cleaner and safer!
+                </p>
+            </div>
+
+            <!-- 4-YEAR ROADMAP TIMELINE WITH IMPACT LEVELS -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 font-friendly">
+                
+                <!-- Year 1 -->
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-t-brand-400 space-y-3 relative">
+                    <span class="px-2.5 py-1 bg-brand-500/20 text-brand-400 text-xs rounded-full font-mono">Year 1</span>
+                    <h3 class="text-lg font-bold text-white">Prototype Development</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        Building basic IoT gas sensors and testing gas detection accuracy at HITAM campus.
+                    </p>
+                    <div class="pt-2 border-t border-slate-800 text-xs">
+                        <span class="text-slate-400">Impact Level:</span>
+                        <div class="text-brand-400 font-bold">🟢 Level 1: Initial Testing</div>
+                    </div>
+                </div>
+
+                <!-- Year 2 -->
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-t-cyan-400 space-y-3 relative">
+                    <span class="px-2.5 py-1 bg-cyan-500/20 text-cyan-400 text-xs rounded-full font-mono">Year 2</span>
+                    <h3 class="text-lg font-bold text-white">Pilot Implementation</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        Installing prototype nodes in industrial micro-zones like Jeedimetla and Patancheru.
+                    </p>
+                    <div class="pt-2 border-t border-slate-800 text-xs">
+                        <span class="text-slate-400">Impact Level:</span>
+                        <div class="text-cyan-400 font-bold">🔵 Level 2: Ground Deployment</div>
+                    </div>
+                </div>
+
+                <!-- Year 3 -->
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-t-amber-400 space-y-3 relative">
+                    <span class="px-2.5 py-1 bg-amber-500/20 text-amber-400 text-xs rounded-full font-mono">Year 3</span>
+                    <h3 class="text-lg font-bold text-white">System Enhancement</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        Advanced AI camera integration for smoke detection & seamless sensor synergy.
+                    </p>
+                    <div class="pt-2 border-t border-slate-800 text-xs">
+                        <span class="text-slate-400">Impact Level:</span>
+                        <div class="text-amber-400 font-bold">🟡 Level 3: AI & Camera Synergy</div>
+                    </div>
+                </div>
+
+                <!-- Year 4 -->
+                <div class="glass-card p-6 rounded-3xl border-t-4 border-t-purple-400 space-y-3 relative">
+                    <span class="px-2.5 py-1 bg-purple-500/20 text-purple-400 text-xs rounded-full font-mono">Year 4</span>
+                    <h3 class="text-lg font-bold text-white">Expansion & Sustainability</h3>
+                    <p class="text-xs text-slate-300 font-sans leading-relaxed">
+                        Expanding to all industrial sectors across Hyderabad with solar power backup.
+                    </p>
+                    <div class="pt-2 border-t border-slate-800 text-xs">
+                        <span class="text-slate-400">Impact Level:</span>
+                        <div class="text-purple-400 font-bold">🟣 Level 4: Smart City Scale</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- EMBEDDED QUICK ALERT FORMSPREE CARD -->
+            <div class="glass-card p-6 sm:p-8 rounded-3xl border border-brand-500/40 space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-brand-500/20 text-brand-400 flex items-center justify-center text-xl">
+                        🔔
+                    </div>
+                    <div>
+                        <h3 class="font-friendly text-xl font-bold text-white">Quick Emergency Alert System</h3>
+                        <p class="text-xs text-slate-400">Sends an instant email alert to our Formspree inbox when air pollution is too high.</p>
+                    </div>
+                </div>
+
+                <form action="https://formspree.io/f/YOUR_FORMSPREE_FORM_ID" method="POST" class="grid grid-cols-1 sm:grid-cols-3 gap-4 font-sans text-xs">
+                    <input type="text" name="quick_area" placeholder="Area Name (e.g., HITAM Campus)" required class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-brand-400">
+                    <input type="text" name="quick_issue" placeholder="Problem (e.g., Heavy Smoke)" required class="bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-brand-400">
+                    <button type="submit" class="bg-brand-500 hover:bg-brand-400 text-black font-friendly font-bold rounded-xl p-3 transition-all">
+                        🚀 Send Quick Alert
+                    </button>
+                </form>
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FLOATING "REACH OUT TO US" BUTTON (BOTTOM-RIGHT PRESENT ON ALL PAGES) -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <button id="fab-reachout" class="px-5 py-3.5 bg-gradient-to-r from-brand-500 to-emerald-400 text-black font-friendly font-bold rounded-full shadow-2xl shadow-brand-500/50 hover:scale-105 transition-all flex items-center gap-2 text-sm sm:text-base">
+            <span>💬 Reach Out To Us</span>
+        </button>
+    </div>
+
+    <!-- REACH OUT MODAL POPUP -->
+    <div id="reachout-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-card max-w-lg w-full p-6 sm:p-8 rounded-3xl border border-brand-500/40 relative space-y-6">
+            
+            <!-- Close Button -->
+            <button id="modal-close" class="absolute top-4 right-4 text-slate-400 hover:text-white text-xl">
+                ✕
+            </button>
+
+            <div class="space-y-1">
+                <h3 class="font-friendly text-2xl font-bold text-white">📩 Inform Pollution Issue</h3>
+                <p class="text-xs text-slate-300">Fill out this simple form to inform us if an area has too much pollution. It goes directly to our Formspree email inbox!</p>
+            </div>
+
+            <!-- FORMSPREE FORM LINKED HERE -->
+            <form action="https://formspree.io/f/xyeeqkqq" method="POST" class="space-y-4 font-sans text-xs">
+                
+                <div>
+                    <label class="block text-slate-300 mb-1">Your Name:</label>
+                    <input type="text" name="name" required placeholder="Enter your name" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-brand-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 mb-1">Your Email:</label>
+                    <input type="email" name="email" required placeholder="name@example.com" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-brand-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 mb-1">Polluted Area / Location:</label>
+                    <input type="text" name="area" required placeholder="e.g. HITAM Campus, Jeedimetla" class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-brand-400">
+                </div>
+
+                <div>
+                    <label class="block text-slate-300 mb-1">What is the problem?</label>
+                    <textarea name="message" rows="3" required placeholder="Too much chimney smoke, bad smell, etc." class="w-full bg-slate-900 border border-slate-700 rounded-xl p-3 text-white outline-none focus:border-brand-400"></textarea>
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-brand-500 hover:bg-brand-400 text-black font-friendly font-bold text-sm rounded-xl shadow-lg transition-all">
+                    ✉️ Send Email to Formspree
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-800 py-6 bg-slate-950 text-center text-xs text-slate-400 font-friendly">
+        <p>Project Net Zero © HITAM ECE Department • Clean Air Initiative</p>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPT -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // 1. TAB NAVIGATION SYSTEM
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            const pageContents = document.querySelectorAll('.page-content');
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const targetTab = btn.getAttribute('data-tab');
+
+                    tabBtns.forEach(b => b.classList.remove('active', 'text-black', 'bg-brand-500'));
+                    tabBtns.forEach(b => b.classList.add('text-slate-300'));
+
+                    btn.classList.add('active');
+
+                    pageContents.forEach(page => {
+                        if (page.id === targetTab) {
+                            page.classList.remove('hidden');
+                        } else {
+                            page.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // 2. REACH OUT MODAL LOGIC
+            const fab = document.getElementById('fab-reachout');
+            const modal = document.getElementById('reachout-modal');
+            const modalClose = document.getElementById('modal-close');
+
+            fab.addEventListener('click', () => modal.classList.remove('hidden'));
+            modalClose.addEventListener('click', () => modal.classList.add('hidden'));
+
+            // 3. CHART.JS LIVE POLLUTION GRAPH
+            const ctx = document.getElementById('pollutionChart').getContext('2d');
+            const pollutionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['8 AM', '10 AM', '12 PM', '2 PM', '4 PM', '6 PM', 'Now'],
+                    datasets: [{
+                        label: 'Air Pollution Score (Lower is Better)',
+                        data: [25, 30, 45, 60, 40, 35, 42],
+                        borderColor: '#4ade80',
+                        backgroundColor: 'rgba(74, 222, 128, 0.15)',
+                        borderWidth: 3,
+                        tension: 0.4,
+                        fill: true,
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        pointBackgroundColor: '#22c55e'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { labels: { color: '#cbd5e1', font: { family: 'Fredoka' } } }
+                    },
+                    scales: {
+                        y: {
+                            min: 0,
+                            max: 100,
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        },
+                        x: {
+                            ticks: { color: '#94a3b8' },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' }
+                        }
+                    }
+                }
+            });
+
+            // 4. AREA SELECTOR & CALCULATOR SIMULATOR
+            const areaSelect = document.getElementById('area-select');
+            const sliderTraffic = document.getElementById('slider-traffic');
+            const sliderFactory = document.getElementById('slider-factory');
+            const trafficVal = document.getElementById('traffic-val');
+            const factoryVal = document.getElementById('factory-val');
+
+            const statusTitle = document.getElementById('status-title');
+            const statusDesc = document.getElementById('status-desc');
+            const statusEmoji = document.getElementById('status-emoji');
+
+            const valSmog = document.getElementById('val-smog');
+            const valGas = document.getElementById('val-gas');
+            const valScore = document.getElementById('val-score');
+
+            const textMap = { 1: 'Low', 2: 'Medium', 3: 'High' };
+
+            function updateCalculator() {
+                const traffic = parseInt(sliderTraffic.value);
+                const factory = parseInt(sliderFactory.value);
+
+                trafficVal.textContent = textMap[traffic];
+                factoryVal.textContent = textMap[factory];
+
+                // Calculate Air Score
+                let score = 30 + (traffic * 15) + (factory * 20);
+                if (areaSelect.value === 'jeedimetla') score += 20;
+                if (areaSelect.value === 'patancheru') score += 15;
+
+                score = Math.min(score, 98);
+
+                valScore.textContent = `${score} / 100`;
+
+                // Update Chart live dataset
+                pollutionChart.data.datasets[0].data[6] = score;
+
+                if (score < 55) {
+                    statusTitle.textContent = "Air is Clean & Safe! 🌟";
+                    statusDesc.textContent = `Yay! The air at ${areaSelect.options[areaSelect.selectedIndex].text} is very fresh right now. It's super safe to run around and play outside!`;
+                    statusEmoji.textContent = "⚽";
+                    valSmog.textContent = "Low (Good)";
+                    valGas.textContent = "Safe";
+                    pollutionChart.data.datasets[0].borderColor = '#4ade80';
+                } else if (score < 80) {
+                    statusTitle.textContent = "Air is Okay / Medium 😷";
+                    statusDesc.textContent = `The air at ${areaSelect.options[areaSelect.selectedIndex].text} has some traffic smoke. You can play outside, but don't get too tired!`;
+                    statusEmoji.textContent = "🚴";
+                    valSmog.textContent = "Medium";
+                    valGas.textContent = "Moderate";
+                    pollutionChart.data.datasets[0].borderColor = '#fbbf24';
+                } else {
+                    statusTitle.textContent = "Warning: Dirty Air! 🛑";
+                    statusDesc.textContent = `Watch out! There is too much factory smoke and smog at ${areaSelect.options[areaSelect.selectedIndex].text}. Better play indoors right now!`;
+                    statusEmoji.textContent = "🏠";
+                    valSmog.textContent = "High (Dirty)";
+                    valGas.textContent = "Unsafe";
+                    pollutionChart.data.datasets[0].borderColor = '#ef4444';
+                }
+
+                pollutionChart.update();
+            }
+
+            sliderTraffic.addEventListener('input', updateCalculator);
+            sliderFactory.addEventListener('input', updateCalculator);
+            areaSelect.addEventListener('change', updateCalculator);
+            document.getElementById('calc-btn').addEventListener('click', updateCalculator);
+
+            // 5. LANGUAGE CHANGE TRANSLATIONS (EN, HI, TE)
+            const langSelect = document.getElementById('lang-select');
+            
+            const translations = {
+                en: {
+                    nav_home: "🏠 Home",
+                    nav_about: "ℹ️ About Us",
+                    nav_future: "🚀 Our Future Plans",
+                    home_hero_title: "Is the Air Safe & Fresh Today?",
+                    home_hero_desc: "We use tiny magic smart sensors to check if the air has dirty smoke or bad gas. Pick your area below to see if it's safe to play outdoors!",
+                    label_select_area: "Select Location:",
+                    sim_title: "🎛️ Change Things Up (Calculator Simulator)",
+                    sim_desc: "Move the sliders to see how traffic and factories change the air pollution score at HITAM!",
+                    sim_traffic: "🚗 Cars & Buses Traffic:",
+                    sim_factory: "🏭 Nearby Factory Smoke:",
+                    status_badge: "CURRENT AIR HEALTH STATUS",
+                    graph_sub: "Shows how clean or dirty the air was throughout the day. Lower numbers are better!",
+                    about_title: "What is Project Net Zero?",
+                    about_desc: "Project Net Zero is a smart system created by engineering students at HITAM. It watches over our city to make sure factory chimneys and road vehicles don't release bad poison gases into the air we breathe!",
+                    team_heading: "👥 Meet Our HITAM Student Team",
+                    future_title: "Our 4-Year Plan for Clean Air"
+                },
+                hi: {
+                    nav_home: "🏠 मुख्य पृष्ठ",
+                    nav_about: "ℹ️ हमारे बारे में",
+                    nav_future: "🚀 हमारी भविष्य की योजनाएं",
+                    home_hero_title: "क्या आज हवा साफ और सुरक्षित है?",
+                    home_hero_desc: "हम छोटे स्मार्ट सेंसर का उपयोग करके यह जांचते हैं कि हवा में गंदा धुआं तो नहीं है। अपना क्षेत्र चुनें और देखें कि क्या बाहर खेलना सुरक्षित है!",
+                    label_select_area: "स्थान चुनें:",
+                    sim_title: "🎛️ प्रदूषण कैलकुलेटर (सिम्युलेटर)",
+                    sim_desc: "यह देखने के लिए स्लाइडर चलाएं कि ट्रैफ़िक और फ़ैक्टरियां HITAM में हवा को कैसे बदलती हैं!",
+                    sim_traffic: "🚗 गाड़ियों का ट्रैफिक:",
+                    sim_factory: "🏭 फैक्ट्री का धुआं:",
+                    status_badge: "वर्तमान वायु स्वास्थ्य स्थिति",
+                    graph_sub: "यह दर्शाता है कि दिन भर हवा कितनी साफ या गंदी थी। कम संख्या बेहतर है!",
+                    about_title: "प्रोजेक्ट नेट ज़ीरो क्या है?",
+                    about_desc: "प्रोजेक्ट नेट ज़ीरो HITAM के छात्रों द्वारा बनाया गया एक स्मार्ट सिस्टम है। यह यह सुनिश्चित करता है कि कारखाने हमारी हवा में जहरीली गैसें न छोड़ें!",
+                    team_heading: "👥 हमारी HITAM छात्र टीम से मिलें",
+                    future_title: "स्वच्छ हवा के लिए हमारी 4-वर्षीय योजना"
+                },
+                te: {
+                    nav_home: "🏠 హోమ్",
+                    nav_about: "ℹ️ మా గురించి",
+                    nav_future: "🚀 మా భవిష్యత్తు ప్రణాళికలు",
+                    home_hero_title: "ఈరోజు గాలి శుభ్రంగా ఉందా?",
+                    home_hero_desc: "గాలిలో పొగ లేదా చెడు వాయువులు ఉన్నాయో లేదో తనిఖీ చేయడానికి మేము చిన్న స్మార్ట్ సెన్సార్‌లను ఉపయోగిస్తాము. బయట ఆడుకోవడం సురక్షితమో కాదో చూడటానికి మీ ప్రాంతాన్ని ఎంచుకోండి!",
+                    label_select_area: "ప్రాంతాన్ని ఎంచుకోండి:",
+                    sim_title: "🎛️ కాలుష్య కాలిక్యులేటర్",
+                    sim_desc: "ట్రాఫిక్ మరియు ఫ్యాక్టరీలు HITAM లో గాలి కాలుష్యాన్ని ఎలా మారుస్తాయో చూడటానికి స్లైడర్‌లను జరపండి!",
+                    sim_traffic: "🚗 కార్లు & బస్సుల ట్రాఫిక్:",
+                    sim_factory: "🏭 ఫ్యాక్టరీ పొగ:",
+                    status_badge: "ప్రస్తుత గాలి స్థితి",
+                    graph_sub: "రోజువారీ గాలి ఎంత శుభ్రంగా ఉందో చూపిస్తుంది. తక్కువ సంఖ్య మంచిది!",
+                    about_title: "ప్రాజెక్ట్ నెట్ జీరో అంటే ఏమిటి?",
+                    about_desc: "ప్రాజెక్ట్ నెట్ జీరో అనేది HITAM ఇంజనీరింగ్ విద్యార్థులు తయారు చేసిన స్మార్ట్ సిస్టమ్. పరిశ్రమలు గాలిలోకి విషవాయువులను విడుదల చేయకుండా ఇది చూస్తుంది!",
+                    team_heading: "👥 మా HITAM విద్యార్థుల బృందం",
+                    future_title: "పరిశుభ్రమైన గాలి కోసం మా 4 సంవత్సరాల ప్రణాళిక"
+                }
+            };
+
+            langSelect.addEventListener('change', (e) => {
+                const lang = e.target.value;
+                const langData = translations[lang];
+
+                document.querySelectorAll('[data-key]').forEach(elem => {
+                    const key = elem.getAttribute('data-key');
+                    if (langData[key]) {
+                        elem.textContent = langData[key];
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
